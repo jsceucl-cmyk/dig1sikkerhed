@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="da">
 <head>
@@ -25,7 +24,7 @@
     .card h3{margin:6px 0 4px 0;font-size:18px}
     .card p{margin:4px 0 8px 0;font-size:14px}
     .media{background:#eef3f9;border-radius:8px;display:flex;align-items:center;justify-content:center;min-height:150px;margin:6px 0 10px 0}
-    .media img{max-width:100%;border-radius:6px}
+    .media img{max-width:100%;border-radius:6px;max-height: 250px;object-fit: contain;}
     .btns{display:flex;gap:8px;margin-top:auto}
     .btn{flex:1 1 0;border:none;border-radius:10px;padding:10px 12px;font-weight:600;cursor:pointer;color:#fff;font-size:15px}
     .btn.ok{background:var(--ok)}
@@ -34,7 +33,7 @@
     .right{color:var(--ok)}
     .wrong{color:var(--notok)}
 
-    .scorebar{position:sticky;bottom:0;left:0;right:0;background:#0f1b2a;color:#fff;padding:10px 16px;display:flex;gap:16px;align-items:center;justify-content:space-between}
+    .scorebar{position:sticky;bottom:0;left:0;right:0;background:#0f1b2a;color:#fff;padding:10px 16px;display:flex;gap:16px;align-items:center;justify-content:space-between;z-index:100}
     .scorebar .actions{display:flex;gap:8px}
     .scorebar button{background:#ffffff; color:#0f1b2a; border:none;border-radius:8px;padding:10px 14px;font-weight:700;cursor:pointer}
 
@@ -42,8 +41,9 @@
 </style>
 </head>
 <body>
+
 <header>
-    <img class="logo" src="LOGO.png" alt="DIGITALISERING 1" />
+    <img class="logo" src="logo.png" alt="DIGITALISERING 1" />
     <h1>OK / IKKE OK – Internet • Intranet • Produktionsnet • Phishing • USB • Adgang</h1>
     <p class="sub">Vælg det rigtige svar for hvert scenarie. Brug din viden fra Dag 2 om netværk og datasikkerhed.</p>
 </header>
@@ -61,84 +61,85 @@
 </div>
 
 <script>
+// Filnavne rettet til at matche dit GitHub screenshot 100%
 const scenarios = [
   {
-    id: 'Phishing_mail',
+    id: 'phishing_mail',
     title: 'Phishing‑mail med ukendt link',
     text: 'Du modtager en mail med et “Log ind her” link fra en ukendt afsender.',
-    img: 'scenarios/Phishing_mail.png',
+    img: 'scenarios/phishing_mail.png',
     okCorrect: false,
     explain: 'Klik aldrig på ukendte links. Tjek afsender og rapportér som phishing.'
   },
   {
-    id: 'Fundet_USB',
+    id: 'fundet_usb',
     title: 'Fundet USB‑stick på gulvet',
     text: 'Du finder et USB‑stick ved kaffemaskinen og vil tjekke indholdet.',
-    img: 'scenarios/Fundet_USB.png',
+    img: 'scenarios/fundet_usb.png',
     okCorrect: false,
     explain: 'Brug aldrig ukendte USB‑enheder. Aflever den til IT.'
   },
   {
-    id: 'Intranet_login',
+    id: 'intranet_login',
     title: 'Login på virksomhedens intranet',
     text: 'Du logger på intranettet via godkendt adresse og to‑faktor.',
-    img: 'scenarios/Intranet_login.png',
+    img: 'scenarios/intranet_login.png',
     okCorrect: true,
     explain: 'God praksis: Officiel adresse + to‑faktor godkendelse.'
   },
   {
-    id: 'Password_postit',
+    id: 'password_postit',
     title: 'Password på post‑it under tastaturet',
     text: 'Adgangskoden er skrevet ned og gemt i skuffen.',
-    img: 'scenarios/Password_postit.png',
+    img: 'scenarios/password_postit.png',
     okCorrect: false,
     explain: 'Adgangskoder må ikke skrives ned. Brug stærk, unik kode + evt. password manager.'
   },
   {
-    id: 'Ukendt_wifi',
+    id: 'ukendt_wifi',
     title: 'Forbinder til ukendt WiFi',
     text: 'Du forbinder til et åbent gæste‑WiFi i produktionen.',
-    img: 'scenarios/Ukendt_wifi.png',
+    img: 'scenarios/ukendt_wifi.png',
     okCorrect: false,
     explain: 'Brug kun godkendte netværk (produktion/virksomhed). Åbne netværk kan aflytte trafikken.'
   },
   {
-    id: 'Deling_af_filer',
+    id: 'deling_af_filer',
     title: 'Deling af filer via godkendt Teams‑kanal',
     text: 'Du deler en SOP‑PDF med dit hold i virksomhedens Teams‑kanal.',
-    img: 'scenarios/Deling_af_filer.png',
+    img: 'scenarios/deling_af_filer.png',
     okCorrect: true,
     explain: 'God praksis: Del dokumenter i godkendte kanaler med rette rettigheder.'
   },
   {
-    id: 'Privat_udstyr_paa_net',
+    id: 'privat_udstyr_paa_net',
     title: 'Privat udstyr på produktionsnettet',
     text: 'En privat tablet kobles på produktionsnettet for “lige at tjekke mail”.',
-    img: 'scenarios/Privat_udstyr_på_net.png',
+    img: 'scenarios/privat_udstyr_på_net.png',
     okCorrect: false,
     explain: 'Privat udstyr må ikke på produktionsnettet. Brug kun godkendte enheder.'
   },
   {
-    id: 'Udlaane_badge',
+    id: 'udlaane_badge',
     title: 'Låne adgangsbadge til kollega',
     text: 'Kollega har glemt sin badge – du låner din ud.',
-    img: 'scenarios/Udlåne_badge.png',
+    img: 'scenarios/udlåne_badge.png',
     okCorrect: false,
     explain: 'Adgangsbadge er personlig. Henvís til reception/IT for midlertidig adgang.'
   },
   {
-    id: 'QR_kode_ukendt',
+    id: 'qr_kode_ukendt',
     title: 'Scanner ukendt QR‑kode i produktionen',
     text: 'En QR‑kode uden afsender ligger på en maskine – du scanner for at se indholdet.',
-    img: 'scenarios/QR_kode_ukendt.png',
+    img: 'scenarios/qr_kode_ukendt.png',
     okCorrect: false,
     explain: 'Ukendte QR‑koder kan lede til skadelige sider. Brug kun officielle, kendte koder.'
   },
   {
-    id: 'Download_ukendt_app',
+    id: 'download_ukendt_app',
     title: 'Downloader ukendt app på arbejds‑tablet',
     text: 'En “gratis viewer” installeres for at læse en fil.',
-    img: 'scenarios/Download_ukendt_app.png',
+    img: 'scenarios/download_ukendt_app.png',
     okCorrect: false,
     explain: 'Installer kun godkendte apps fra virksomhedens liste/app‑styring.'
   }
@@ -175,7 +176,6 @@ function onAnswer(e){
   const id = e.currentTarget.dataset.id;
   const s = scenarios.find(x=>x.id===id);
   const fb = document.getElementById('fb-'+id);
-  // disable buttons for this card
   const parent = e.currentTarget.closest('.card');
   parent.querySelectorAll('.btn').forEach(b=> b.disabled = true);
   answered++;
@@ -193,7 +193,6 @@ document.getElementById('reset').addEventListener('click', ()=>{
 });
 
 document.getElementById('showAnswers').addEventListener('click', ()=>{
-  // show all explanations and lock cards
   document.querySelectorAll('.card').forEach((card, i)=>{
     const s = scenarios[i];
     card.querySelectorAll('.btn').forEach(b=> b.disabled = true);
